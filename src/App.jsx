@@ -1,9 +1,10 @@
-import TravelPlan from "./TravelPlan";
+import Accordion from "./Accordion";
+import "./styles.css";
 
 export default function App() {
   return (
     <div>
-      <TravelPlan />
+      <Accordion />
     </div>
   );
 }
