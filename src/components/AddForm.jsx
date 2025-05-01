@@ -43,131 +43,111 @@ export default function AddForm({
     }
   }
   return (
-    <div className="fixed inset-0 z-50 flex min-h-screen items-center justify-center bg-gray-900 p-4 text-white">
-      <div className="w-full max-w-md rounded-lg bg-gray-800 shadow-xl">
-        <div className="p-6">
-          <h2 className="mb-6 text-2xl font-bold text-green-400">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="w-full max-w-md bg-gray-900 text-white rounded-xl shadow-lg animate-slide-up p-6 relative">
+        <div className="mb-4">
+          <h2 className="text-2xl font-bold text-green-400 text-center">
             {editedTask ? "Edit Task" : "Create Task"}
           </h2>
-          {warningText && (
-            <p className="text-center text-red-500">{warningText}</p>
-          )}
-          <form>
-            <div className="mb-4">
-              <label
-                htmlFor="taskName"
-                className="mb-1 block text-sm font-medium text-gray-300"
-              >
-                Task Name
-              </label>
-              <input
-                type="text"
-                id="taskName"
-                name="taskName"
-                value={task.title}
-                required
-                className="w-full rounded-md border border-gray-600 bg-gray-700 px-3 py-2 text-white placeholder-gray-400 shadow-sm focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500"
-                onChange={(e) => {
-                  setWarningText("");
-                  setTask({
-                    ...task,
-                    title: e.target.value,
-                  });
-                }}
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="description"
-                className="mb-1 block text-sm font-medium text-gray-300"
-              >
-                Description
-              </label>
-              <textarea
-                id="description"
-                name="description"
-                value={task.description}
-                rows="3"
-                className="w-full rounded-md border border-gray-600 bg-gray-700 px-3 py-2 text-white placeholder-gray-400 shadow-sm focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500"
-                onChange={(e) => {
-                  setWarningText("");
-                  setTask({
-                    ...task,
-                    description: e.target.value,
-                  });
-                }}
-              ></textarea>
-            </div>
-            <div className="mb-4">
-              <label
-                htmlFor="dueDate"
-                className="mb-1 block text-sm font-medium text-gray-300"
-              >
-                Due Date
-              </label>
-              <input
-                type="date"
-                id="dueDate"
-                name="dueDate"
-                value={task.date}
-                className="w-full rounded-md border border-gray-600 bg-gray-700 px-3 py-2 text-white shadow-sm focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500"
-                onChange={(e) => {
-                  setWarningText("");
-                  setTask({
-                    ...task,
-                    date: e.target.value,
-                  });
-                }}
-              />
-            </div>
-
-            <div className="mb-4">
-              <label
-                htmlFor="category"
-                className="mb-1 block text-sm font-medium text-gray-300"
-              >
-                Category
-              </label>
-              <select
-                id="category"
-                name="category"
-                value={category}
-                className="w-full rounded-md border border-gray-600 bg-gray-700 px-3 py-2 text-white shadow-sm focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500"
-                onChange={(e) => {
-                  setWarningText("");
-                  setCategory(e.target.value);
-                }}
-              >
-                <option value="todo">To-Do</option>
-                <option value="inprogress">On Progress</option>
-                <option value="done">Done</option>
-                <option value="revised">Revised</option>
-              </select>
-            </div>
-
-            <div className="flex justify-end space-x-3">
-              <button
-                onClick={() => {
-                  onUpdatedFinished();
-                  onClose();
-                }}
-                type="button"
-                className="rounded-md border border-gray-600 px-4 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-800"
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className="rounded-md border border-transparent bg-green-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-800"
-                onClick={(e) => {
-                  e.preventDefault(), handleAddTask();
-                }}
-              >
-                {editedTask ? "Update Task" : "Create Task"}
-              </button>
-            </div>
-          </form>
         </div>
+
+        {warningText && (
+          <p className="text-center text-red-500 mb-2">{warningText}</p>
+        )}
+
+        <form>
+          {/* Task Name */}
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-300 mb-1">
+              Task Name
+            </label>
+            <input
+              type="text"
+              value={task.title}
+              className="w-full bg-gray-800 border border-gray-600 rounded-md px-3 py-2 placeholder-gray-400 focus:outline-none focus:bg-gray-800"
+              onChange={(e) => {
+                setWarningText("");
+                setTask({ ...task, title: e.target.value });
+              }}
+            />
+          </div>
+
+          {/* Description */}
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-300 mb-1">
+              Description
+            </label>
+            <textarea
+              rows="3"
+              value={task.description}
+              className="w-full bg-gray-800 border border-gray-600 rounded-md px-3 py-2 placeholder-gray-400 focus:outline-none  focus:bg-gray-800"
+              onChange={(e) => {
+                setWarningText("");
+                setTask({ ...task, description: e.target.value });
+              }}
+            ></textarea>
+          </div>
+
+          {/* Due Date */}
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-300 mb-1">
+              Due Date
+            </label>
+            <input
+              type="date"
+              value={task.date}
+              className="w-full bg-gray-800 border border-gray-600 rounded-md px-3 py-2 focus:outline-none  focus:bg-gray-800"
+              onChange={(e) => {
+                setWarningText("");
+                setTask({ ...task, date: e.target.value });
+              }}
+            />
+          </div>
+
+          {/* Category */}
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-300 mb-1">
+              Category
+            </label>
+            <select
+              value={category}
+              className="w-full bg-gray-800 border border-gray-600 rounded-md px-3 py-2 focus:outline-none  focus:bg-gray-800"
+              onChange={(e) => {
+                setWarningText("");
+                setCategory(e.target.value);
+              }}
+            >
+              <option value="todo">To-Do</option>
+              <option value="inprogress">In Progress</option>
+              <option value="done">Done</option>
+              <option value="revised">Revised</option>
+            </select>
+          </div>
+
+          {/* Buttons */}
+          <div className="flex justify-end gap-3 mt-4">
+            <button
+              type="button"
+              onClick={() => {
+                onUpdatedFinished();
+                onClose();
+              }}
+              className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              onClick={(e) => {
+                e.preventDefault();
+                handleAddTask();
+              }}
+              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md"
+            >
+              {editedTask ? "Update Task" : "Create Task"}
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
