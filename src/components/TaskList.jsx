@@ -31,9 +31,9 @@ export default function TaskList() {
 
   //if no task found when search
   const taskFound =
-    filterdTasks?.todo?.length > 0 &&
-    filterdTasks?.inprogress?.length > 0 &&
-    filterdTasks?.done?.length > 0 &&
+    filterdTasks?.todo?.length > 0 ||
+    filterdTasks?.inprogress?.length > 0 ||
+    filterdTasks?.done?.length > 0 ||
     filterdTasks?.revised?.length > 0;
 
   //if any task exist
