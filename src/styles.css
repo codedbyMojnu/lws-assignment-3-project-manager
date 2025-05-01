@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* index.css or AddForm.module.css */
 @keyframes slideUp {
   0% {
     transform: translateY(100%);

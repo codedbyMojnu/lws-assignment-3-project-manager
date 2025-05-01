@@ -29,8 +29,8 @@ export default function TaskList() {
     ),
   };
 
-  //No task found when search
-  const noTaskFound =
+  //if no task found when search
+  const taskFound =
     filterdTasks?.todo?.length > 0 &&
     filterdTasks?.inprogress?.length > 0 &&
     filterdTasks?.done?.length > 0 &&
@@ -87,19 +87,23 @@ export default function TaskList() {
         </div>
 
         {anyTasksExist ? (
-          <div className="mx-2 mb-6 flex flex-wrap">
-            {Object.keys(filterdTasks).map((category) => (
-              <TaskCard
-                key={category}
-                category={category}
-                onEditTask={handleEditTask}
-                tasks={filterdTasks}
-              />
-            ))}
-          </div>
+          taskFound ? (
+            <div className="mx-2 mb-6 flex flex-wrap">
+              {Object.keys(filterdTasks).map((category) => (
+                <TaskCard
+                  key={category}
+                  category={category}
+                  onEditTask={handleEditTask}
+                  tasks={filterdTasks}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center text-red-500">No Task Found!</div>
+          )
         ) : (
-          <div className="flex justify-center items-center">
-            <p>Task List is empty. Add task first.</p>
+          <div className="flex justify-center items-center text-red-500">
+            <p>Task List is empty. Create a new one.</p>
           </div>
         )}
       </div>
