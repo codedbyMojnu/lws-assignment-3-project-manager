@@ -8,11 +8,11 @@ export default function TaskList() {
   const [showForm, setShowForm] = useState(false);
   const [editedTask, setEditedTask] = useState(null);
   const [editedCategory, setEditedCategory] = useState(null);
-  const { tasks } = useTaskList();
+  const { searchQuery, tasks } = useTaskList();
 
   // Search by title
 
-  const searchText = "";
+  const searchText = searchQuery || "";
 
   const filterdTasks = {
     todo: tasks.todo.filter((task) =>
@@ -28,6 +28,13 @@ export default function TaskList() {
       task.title.toLowerCase().includes(searchText.toLowerCase())
     ),
   };
+
+  //No task found when search
+  const noTaskFound =
+    filterdTasks?.todo?.length > 0 &&
+    filterdTasks?.inprogress?.length > 0 &&
+    filterdTasks?.done?.length > 0 &&
+    filterdTasks?.revised?.length > 0;
 
   //if any task exist
   const anyTasksExist =
@@ -81,11 +88,12 @@ export default function TaskList() {
 
         {anyTasksExist ? (
           <div className="mx-2 mb-6 flex flex-wrap">
-            {Object.keys(tasks).map((category) => (
+            {Object.keys(filterdTasks).map((category) => (
               <TaskCard
                 key={category}
                 category={category}
                 onEditTask={handleEditTask}
+                tasks={filterdTasks}
               />
             ))}
           </div>

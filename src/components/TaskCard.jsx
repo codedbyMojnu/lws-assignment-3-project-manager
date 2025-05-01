@@ -1,9 +1,10 @@
+import { useState } from "react";
 import SortingBtn from "../assets/svg/SortingBtn";
-import { useTaskList } from "../context/TaskContext";
 import Task from "./Task";
 
-export default function TaskCard({ category, onEditTask }) {
-  const { tasks } = useTaskList();
+export default function TaskCard({ category, onEditTask, tasks }) {
+  const [sortedTasks, setSortedTasks] = useState(null);
+  const [sortingToogle, setSortingToogle] = useState(false);
   const backgroundColor = {
     todo: "bg-indigo-600",
     inprogress: "bg-yellow-500",
@@ -12,6 +13,14 @@ export default function TaskCard({ category, onEditTask }) {
   };
 
   const background = backgroundColor[category];
+
+  function handleSorting() {
+    const sorted = [...tasks[category]].sort((a, b) => {
+      return new Date(a.date) - new Date(b.date);
+    });
+
+    setSortedTasks(sorted);
+  }
   return (
     <div className="mb-4 w-full px-2 sm:w-1/2 md:w-1/4">
       {tasks[category]?.length > 0 && (
@@ -20,17 +29,33 @@ export default function TaskCard({ category, onEditTask }) {
             <h3 className="text-lg font-semibold">
               {category} ({tasks[category]?.length})
             </h3>
-            <SortingBtn />
+            <div
+              onClick={() => {
+                setSortingToogle(!sortingToogle);
+                handleSorting();
+              }}
+            >
+              <SortingBtn />
+            </div>
           </div>
           <div>
-            {tasks[category].map((task) => (
-              <Task
-                key={task.id}
-                task={task}
-                category={category}
-                onEditTask={onEditTask}
-              />
-            ))}
+            {sortingToogle
+              ? sortedTasks.map((task) => (
+                  <Task
+                    key={task.id}
+                    task={task}
+                    category={category}
+                    onEditTask={onEditTask}
+                  />
+                ))
+              : tasks[category].map((task) => (
+                  <Task
+                    key={task.id}
+                    task={task}
+                    category={category}
+                    onEditTask={onEditTask}
+                  />
+                ))}
           </div>
         </div>
       )}

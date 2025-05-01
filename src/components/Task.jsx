@@ -1,6 +1,7 @@
 import DeleteBtn from "../assets/svg/DeleteBtn";
 import EditPen from "../assets/svg/EditPen";
 import { useTaskList } from "../context/TaskContext";
+import formatDate from "./../utils/formatDate";
 
 export default function Task({ task, category, onEditTask }) {
   const { tasks, dispatch } = useTaskList();
@@ -31,7 +32,7 @@ export default function Task({ task, category, onEditTask }) {
       </div>
       <p className="mb-2 text-sm text-zinc-200">{task.description}</p>
 
-      <p className="mt-6 text-xs text-zinc-400">{task.date}</p>
+      <p className="mt-6 text-xs text-zinc-400">{formatDate(task.date)}</p>
     </div>
   );
 }

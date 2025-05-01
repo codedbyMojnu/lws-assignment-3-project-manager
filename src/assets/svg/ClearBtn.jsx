@@ -1,6 +1,10 @@
-export default function ClearBtn() {
+export default function ClearBtn({ setSearchQuery }) {
   return (
-    <button className="ml-[-50px]" aria-label="Close">
+    <button
+      className="ml-[-50px]"
+      aria-label="Close"
+      onClick={() => setSearchQuery("")}
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="white"
