@@ -43,7 +43,7 @@ export default function AddForm({
     }
   }
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-900 p-4 text-white">
+    <div className="fixed inset-0 z-50 flex min-h-screen items-center justify-center bg-gray-900 p-4 text-white">
       <div className="w-full max-w-md rounded-lg bg-gray-800 shadow-xl">
         <div className="p-6">
           <h2 className="mb-6 text-2xl font-bold text-green-400">
