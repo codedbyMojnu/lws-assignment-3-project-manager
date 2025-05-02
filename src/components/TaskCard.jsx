@@ -23,7 +23,7 @@ export default function TaskCard({ category, onEditTask, tasks }) {
   }
   return (
     <div className="mb-4 w-full px-2 sm:w-1/2 md:w-1/4">
-      {tasks[category]?.length > 0 && (
+      {tasks[category]?.length > 0 ? (
         <div className={`rounded-lg ${background}  p-4`}>
           <div className="mb-2 flex items-center justify-between">
             <h3 className="text-lg font-semibold">
@@ -38,6 +38,7 @@ export default function TaskCard({ category, onEditTask, tasks }) {
               <SortingBtn />
             </div>
           </div>
+
           <div>
             {sortingToogle
               ? sortedTasks.map((task) => (
@@ -46,6 +47,7 @@ export default function TaskCard({ category, onEditTask, tasks }) {
                     task={task}
                     category={category}
                     onEditTask={onEditTask}
+                    tasks={tasks}
                   />
                 ))
               : tasks[category].map((task) => (
@@ -54,9 +56,17 @@ export default function TaskCard({ category, onEditTask, tasks }) {
                     task={task}
                     category={category}
                     onEditTask={onEditTask}
+                    tasks={tasks}
                   />
                 ))}
           </div>
+        </div>
+      ) : (
+        <div className={`rounded-lg ${background} p-4`}>
+          <h3 className="text-lg font-semibold">
+            {category} ({tasks[category].length})
+          </h3>
+          <div className="mt-4">No task in {category} category</div>
         </div>
       )}
     </div>

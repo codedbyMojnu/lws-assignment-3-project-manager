@@ -86,25 +86,19 @@ export default function TaskList() {
           </div>
         </div>
 
-        {anyTasksExist ? (
-          taskFound ? (
-            <div className="mx-2 mb-6 flex flex-wrap">
-              {Object.keys(filterdTasks).map((category) => (
-                <TaskCard
-                  key={category}
-                  category={category}
-                  onEditTask={handleEditTask}
-                  tasks={filterdTasks}
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center text-red-500">No Task Found!</div>
-          )
-        ) : (
-          <div className="flex justify-center items-center text-red-500">
-            <p>Task List is empty. Create a new one.</p>
+        {taskFound ? (
+          <div className="mx-2 mb-6 flex flex-wrap">
+            {Object.keys(filterdTasks).map((category) => (
+              <TaskCard
+                key={category}
+                category={category}
+                onEditTask={handleEditTask}
+                tasks={filterdTasks}
+              />
+            ))}
           </div>
+        ) : (
+          <div className="text-center text-red-500">No Task Found!</div>
         )}
       </div>
     </>
